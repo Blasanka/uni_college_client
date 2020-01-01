@@ -13,7 +13,6 @@ class Students extends Component {
     axios
       .get("/students")
       .then(res => {
-        console.log(res.data);
         this.setState({
           students: res.data
         });

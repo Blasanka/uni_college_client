@@ -19,6 +19,7 @@ import home from "./pages/home";
 import Login from "./pages/login";
 // import signup from "./pages/signup";
 import Students from "./pages/students";
+import Details from "./pages/details";
 
 const theme = createMuiTheme(themeFile);
 
@@ -81,6 +82,13 @@ export class App extends React.Component {
                   path="/students"
                   component={() => (
                     <Students onRouteChange={this.onRouteChange} />
+                  )}
+                />
+                <AuthRoute
+                  exact
+                  path="/students/:studentId"
+                  component={() => (
+                    <Details onRouteChange={this.onRouteChange} />
                   )}
                 />
               </Switch>

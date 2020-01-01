@@ -39,7 +39,7 @@ export class NavBar extends React.Component {
     this.props.history.push("/login");
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.setState({
       isLoggedIn: this.props.isLoggedIn
     });

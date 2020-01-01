@@ -57,14 +57,14 @@ export class StudentTable extends React.Component {
       // { title: "DOB", field: "dob" },
       { title: "Gender", field: "gender" },
       // { title: "Religion", field: "religion" },
-      { title: "Mobile No", field: "phone_number" }
+      { title: "Mobile No", field: "mobile_number" }
       // { title: "Parent No", field: "parents_number" }
     ],
     data: []
   };
 
   render() {
-    const { classes, students } = this.props;
+    const { students } = this.props;
 
     let recentStudentMarkup = students
       ? students.map(student => ({
@@ -74,7 +74,7 @@ export class StudentTable extends React.Component {
           department: student.department,
           address: student.address,
           email: student.email,
-          phone_number: student.phone_number,
+          mobile_number: student.mobile_number,
           parents_number: student.parents_number,
           dob: student.dob.toString(),
           gender: student.gender,
@@ -91,9 +91,13 @@ export class StudentTable extends React.Component {
         columns={this.state.columns}
         data={recentStudentMarkup}
         icons={tableIcons}
+        style={{ paddingLeft: 10 }}
         onRowClick={(evt, selectedRow) => {
           this.setState({ selectedRow });
-          this.props.history.push(`/students/${selectedRow.index}`);
+          this.props.history.push({
+            pathname: `/students/${selectedRow.index}`,
+            state: { student: selectedRow }
+          });
         }}
         editable={{
           // onRowAdd: newData =>
@@ -107,19 +111,19 @@ export class StudentTable extends React.Component {
           //       });
           //     }, 600);
           //   }),
-          onRowUpdate: (newData, oldData) =>
-            new Promise(resolve => {
-              setTimeout(() => {
-                resolve();
-                if (oldData) {
-                  this.setState(prevState => {
-                    const data = [...prevState.data];
-                    data[data.indexOf(oldData)] = newData;
-                    return { ...prevState, data };
-                  });
-                }
-              }, 600);
-            }),
+          // onRowUpdate: (newData, oldData) =>
+          //   new Promise(resolve => {
+          //     setTimeout(() => {
+          //       resolve();
+          //       if (oldData) {
+          //         this.setState(prevState => {
+          //           const data = [...prevState.data];
+          //           data[data.indexOf(oldData)] = newData;
+          //           return { ...prevState, data };
+          //         });
+          //       }
+          //     }, 600);
+          //   }),
           onRowDelete: oldData =>
             new Promise(resolve => {
               setTimeout(() => {
